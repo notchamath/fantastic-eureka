@@ -29,6 +29,7 @@ class DataManager:
             city = self.wishlist[idx]
 
             if city["iataCode"] == "":
+                # Get missing IATA Code from Flight API
                 city_code = self.flights.get_city_code(city["city"])
 
                 # Update "IATA Code" section on Google Sheet
