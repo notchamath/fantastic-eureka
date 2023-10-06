@@ -2,7 +2,7 @@ import os
 import requests
 
 FLIGHT_KEY = os.environ["FLIGHT_KEY"]
-FLIGHT_ENDPOINT = "https://api.tequila.kiwi.com/locations/query/"
+FLIGHT_ENDPOINT = "https://api.tequila.kiwi.com"
 HEADER = {
     "apikey": FLIGHT_KEY,
 }
@@ -18,6 +18,10 @@ class FlightSearch:
             "term": city
         }
 
-        res = requests.get(url=FLIGHT_ENDPOINT, headers=HEADER, params=params)
+        location_endpoint = f"{FLIGHT_ENDPOINT}/locations/query/"
+        res = requests.get(
+            url=location_endpoint,
+            headers=HEADER,
+            params=params)
         res.raise_for_status()
         return res.json()["locations"][0]["code"]
