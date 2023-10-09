@@ -19,8 +19,8 @@ class DataManager:
         # res.raise_for_status()
         # self.wishlist = res.json()["prices"]
         self.wishlist = [
-                            {'city': 'Sydney', 'iataCode': 'SYD', 'lowestPrice': 1000, 'id': 5},
-                            {'city': 'Melbourne', 'iataCode': 'MEL', 'lowestPrice': 551, 'id': 6}
+                            {'city': 'Sydney', 'iataCode': 'SYD', 'lowestPrice': 980, 'id': 5},
+                            {'city': 'Melbourne', 'iataCode': 'MEL', 'lowestPrice': 980, 'id': 6}
                         ]
 
 

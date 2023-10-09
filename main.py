@@ -5,10 +5,12 @@
 from data_manager import DataManager
 from flight_search import FlightSearch
 from flight_data import FlightData
+from notification_manager import NotificationManager
 
 data_manager = DataManager()
 flight_search = FlightSearch()
 flight_data = FlightData()
+notification_manager = NotificationManager()
 
 # Get missing IATA Code from Flight API and update Google sheets
 wishlist = data_manager.wishlist
@@ -33,3 +35,8 @@ for destination in wishlist:
 
     flight_search.search_flights(flight_params)
 
+available_flights = flight_search.flights
+if len(available_flights) > 0:
+    for trip in available_flights:
+        for flight in trip:
+            notification_manager.send_text(flight)
