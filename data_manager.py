@@ -20,7 +20,7 @@ class DataManager:
         self.wishlist = res.json()["prices"]
 
     # Update "IATA Code" section on Google Sheet
-    def fill_missing_codes(self, idx, city_code):
+    def fill_missing_code(self, idx, city_code):
         edit_url = f"{SHEETY_ENDPOINT}/{idx + 2}"
         params = {
             "price": {
@@ -29,3 +29,5 @@ class DataManager:
         }
         res = requests.put(url=edit_url, headers=HEADER, json=params)
         res.raise_for_status()
+
+        self.read_spreadsheet()

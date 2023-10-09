@@ -15,6 +15,7 @@ class FlightSearch:
     def __init__(self):
         self.flights = []
 
+    # Get IATA Code for given city from API
     def get_city_code(self, city):
         location_endpoint = f"{FLIGHT_ENDPOINT}/locations/query/"
         params = {
@@ -30,11 +31,7 @@ class FlightSearch:
         return res.json()["locations"][0]["code"]
 
     def search_flights(self):
-        today = datetime.datetime.now()
-        search_begin_date = (today + datetime.timedelta(7)).strftime("%d/%m/%Y")
-        search_end_date = (today + datetime.timedelta(187)).strftime("%d/%m/%Y")
-        nights_in_dst_from = 7
-        nights_in_dst_to = 28
+
 
         search_endpoint = f"{FLIGHT_ENDPOINT}/v2/search"
         params = {
