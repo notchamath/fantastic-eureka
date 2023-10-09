@@ -35,6 +35,7 @@ for destination in wishlist:
 
     flight_search.search_flights(flight_params)
 
+# Send notification
 available_flights = flight_search.flights
 if len(available_flights) > 0:
     for trip in available_flights:
