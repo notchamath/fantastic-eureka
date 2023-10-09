@@ -20,4 +20,16 @@ for idx in range(len(wishlist)):
         # Update google sheet
         data_manager.fill_missing_code(idx, city_code)
 
+# Read Google sheets again once missing info is updated
+data_manager.read_spreadsheet()
+
+# Search for Flights
+wishlist = data_manager.wishlist
+flight_params = flight_data.get_flight_data()
+
+for destination in wishlist:
+    flight_params["price_to"] = destination["lowestPrice"]
+    flight_params["fly_to"] = destination["iataCode"]
+
+    flight_search.search_flights(flight_params)
 

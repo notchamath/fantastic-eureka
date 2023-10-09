@@ -15,9 +15,14 @@ class DataManager:
         self.read_spreadsheet()
 
     def read_spreadsheet(self):
-        res = requests.get(url=SHEETY_ENDPOINT, headers=HEADER)
-        res.raise_for_status()
-        self.wishlist = res.json()["prices"]
+        # res = requests.get(url=SHEETY_ENDPOINT, headers=HEADER)
+        # res.raise_for_status()
+        # self.wishlist = res.json()["prices"]
+        self.wishlist = [
+                            {'city': 'Sydney', 'iataCode': 'SYD', 'lowestPrice': 1000, 'id': 5},
+                            {'city': 'Melbourne', 'iataCode': 'MEL', 'lowestPrice': 551, 'id': 6}
+                        ]
+
 
     # Update "IATA Code" section on Google Sheet
     def fill_missing_code(self, idx, city_code):
@@ -29,5 +34,3 @@ class DataManager:
         }
         res = requests.put(url=edit_url, headers=HEADER, json=params)
         res.raise_for_status()
-
-        self.read_spreadsheet()

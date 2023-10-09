@@ -1,13 +1,11 @@
 import os
 import requests
-import datetime
 
 FLIGHT_KEY = os.environ["FLIGHT_KEY"]
 FLIGHT_ENDPOINT = "https://api.tequila.kiwi.com"
 HEADER = {
     "apikey": FLIGHT_KEY,
 }
-FLY_FROM_CITY = "NYC"
 
 
 # This class is responsible for talking to the Flight Search API.
@@ -30,20 +28,8 @@ class FlightSearch:
         res.raise_for_status()
         return res.json()["locations"][0]["code"]
 
-    def search_flights(self):
-
-
+    def search_flights(self, params):
         search_endpoint = f"{FLIGHT_ENDPOINT}/v2/search"
-        params = {
-            "fly_from": FLY_FROM_CITY,
-            "fly_to": "LON",
-            "date_from": search_begin_date,
-            "date_to": search_end_date,
-            "nights_in_dst_from": nights_in_dst_from,
-            "nights_in_dst_to": nights_in_dst_to,
-            "curr": "USD",
-
-        }
 
         res = requests.get(
             url=search_endpoint,
@@ -52,4 +38,6 @@ class FlightSearch:
         )
         res.raise_for_status()
 
-        print(res.json())
+        data = res.json()
+        if data["_results"] > 0:
+            self.flights.append(data["data"])
